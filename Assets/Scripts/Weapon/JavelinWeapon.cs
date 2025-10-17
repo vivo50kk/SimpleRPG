@@ -20,6 +20,8 @@ public class JavelinWeapon : Weapon
         {
             bulletGo.transform.parent = null;
             bulletGo.GetComponent<Rigidbody>().velocity = transform.forward * BulletSpeed;
+            bulletGo.GetComponent<Collider>().enabled = true;
+            Destroy(bulletGo, 10f);
             bulletGo = null;
             Invoke("SpawnBullet", 0.5f);
         }
@@ -35,5 +37,21 @@ public class JavelinWeapon : Weapon
     {
         bulletGo = GameObject.Instantiate(BulletPerfab, transform.position, transform.rotation);
         bulletGo.transform.parent = transform;
+        bulletGo.GetComponent<Collider>().enabled = false;
+        if (tag == Tag.INTERACTABLE)
+        {
+            Destroy(bulletGo.GetComponent<JavelinBullet>());
+
+            bulletGo.tag = Tag.INTERACTABLE;
+            PickableObject po = bulletGo.AddComponent<PickableObject>();
+            po.ItemSO = GetComponent<PickableObject>().ItemSO;
+            Rigidbody rgd = bulletGo.GetComponent<Rigidbody>();
+            rgd.constraints = ~RigidbodyConstraints.FreezeAll;
+            bulletGo.GetComponent<Collider>().enabled = true;
+
+            bulletGo.transform.parent = null;
+            Destroy(this.gameObject);
+
+        }
     }
 }

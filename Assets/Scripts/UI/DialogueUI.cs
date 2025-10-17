@@ -16,6 +16,7 @@ public class DialogueUI : MonoBehaviour
 
     private List<string> contentList;
     private int contentIndex = 0;
+    private GameObject uiGameObject;
 
     private void Awake()
     {
@@ -28,21 +29,23 @@ public class DialogueUI : MonoBehaviour
     }
     private void Start()
     {
-        nameText = transform.Find("NameTextBG/NameText").GetComponent<TextMeshProUGUI>();
-        contentText = transform.Find("ContentText").GetComponent<TextMeshProUGUI>();
-        continueButton = transform.Find("ContinueButton").GetComponent<Button>();
+        nameText = transform.Find("UI/NameTextBG/NameText").GetComponent<TextMeshProUGUI>();
+        contentText = transform.Find("UI/ContentText").GetComponent<TextMeshProUGUI>();
+        continueButton = transform.Find("UI/ContinueButton").GetComponent<Button>();
         continueButton.onClick.AddListener(this.OnContinueButtonClick);
+
+        uiGameObject = transform.Find("UI").gameObject;
 
         Hide();
     }
     public void Show()
     {
-        gameObject.SetActive(true);
+        uiGameObject.SetActive(true);
     }
 
     public void Show(string name, string[] content)
     {
-        gameObject.SetActive(true);
+        uiGameObject.SetActive(true);
 
         nameText.text = name;
         contentList = new List<string>();
@@ -53,7 +56,7 @@ public class DialogueUI : MonoBehaviour
     }
     public void Hide()
     {
-        gameObject.SetActive(false);
+        uiGameObject.SetActive(false);
     }
 
     private void OnContinueButtonClick()

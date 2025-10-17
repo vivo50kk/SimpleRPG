@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PickableObject : InteractableObject
 {
+    public ItemSO ItemSO;
     protected override void Interact()
     {
-        print("Interacting with pickable!");
+        Destroy(this.gameObject);
+        InventoryManager.Instance.AddItem(ItemSO);
     }
 }

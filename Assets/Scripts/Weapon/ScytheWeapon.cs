@@ -8,6 +8,8 @@ public class ScytheWeapon : Weapon
 
     private Animator anim;
 
+    public int atkValue = 50;
+
 
     private void Start()
     {
@@ -30,8 +32,7 @@ public class ScytheWeapon : Weapon
     {
         if (other.tag == Tag.ENEMY)
         {
-            //TODO
-            print("Trigger with "+other.name);
+            other.GetComponent<Enemy>().TakeDamage(atkValue);
         }
     }
 }

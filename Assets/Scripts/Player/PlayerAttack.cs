@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (weapon != null&&Input.GetKeyDown(KeyCode.Space))
         {
+            
             weapon.Attack();
         }
     }
