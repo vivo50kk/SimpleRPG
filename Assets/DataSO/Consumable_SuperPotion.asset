@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Consumable_SuperPotion
   m_EditorClassIdentifier: 
   id: 3
-  name: "\u51B0\uFF01"
+  name: "\u51B0!"
   itemType: 1
   description: "\u8FD9\u6211\u5F97\u6E9C\u8FD9\u8FB9\u5438"
   propertyList:

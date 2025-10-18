@@ -10,6 +10,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject itemPrefab;
     private bool isShow = false;
 
+    public ItemDetailUI itemDetailUI;
     private void Awake()
     {
         if (Instance != null && Instance !=this)
@@ -57,30 +58,24 @@ public class InventoryUI : MonoBehaviour
     }
     public void AddItem(ItemSO itemSO)
     {
-        if (itemSO == null)
-        {
-            Debug.LogError("InventoryUI.AddItem: 传入的 itemSO 为 null.");
-            return;
-        }
-
-        if (itemPrefab == null)
-        {
-            Debug.LogError("InventoryUI.AddItem: itemPrefab 未在 Inspector 中设置.");
-            return;
-        }
+        
         GameObject itemGO = GameObject.Instantiate(itemPrefab);
         itemGO.transform.parent = content.transform;
         ItemUI itemUI = itemGO.GetComponent<ItemUI>();
-        string type = "";
-        switch (itemSO.itemType)
-        {
-            case ItemType.Weapon:
-                type = "武器";
-                break;
-            case ItemType.Consumable:
-                type = "消耗品";
-                break;
-        }
-        itemUI.InitItem(itemSO.icon, itemSO.name, type);
+        
+        itemUI.InitItem(itemSO);
+    }
+
+    public void OnItemClick(ItemSO itemSO,ItemUI itemUI)
+    {
+        itemDetailUI.UpdateItemDetailUI(itemSO,itemUI);
+    }
+
+    public void OnItemUse(ItemSO itemSO,ItemUI itemUI)
+    {
+        Destroy(itemUI.gameObject);
+        InventoryManager.Instance.RemoveItem(itemSO);
+
+        //TODO:使用物品效果
     }
 }

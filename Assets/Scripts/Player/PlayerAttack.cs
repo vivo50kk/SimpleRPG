@@ -26,6 +26,9 @@ public class PlayerAttack : MonoBehaviour
     {
         this.weapon = weapon;
     }
+    public void LoadWeapon(ItemSO itemSO)
+    {
+    }
 
     public void UnloadWeapon()
     {

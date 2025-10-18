@@ -12,10 +12,31 @@ public class ItemUI : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI typeText;
 
-    public void InitItem(Sprite iconSprite,string name,string type)
+    private ItemSO itemSO;
+
+    public void InitItem(ItemSO itemSO)
     {
-        iconImage.sprite = iconSprite;
-        nameText.text = name;
+        string type = "";
+        switch (itemSO.itemType)
+        {
+            case ItemType.Weapon:
+                type = "武器";
+                break;
+            case ItemType.Consumable:
+                type = "消耗品";
+                break;
+        }
+        iconImage.sprite = itemSO.icon;
+        nameText.text = itemSO.name;
         typeText.text = type;
+        this.itemSO = itemSO;
     }
+
+    public void OnClick()
+    {
+        InventoryUI.Instance.OnItemClick(itemSO,this);
+        print("点击了物品：" + itemSO.name);
+    }
+
+    
 }
