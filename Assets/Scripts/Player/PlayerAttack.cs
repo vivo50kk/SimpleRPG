@@ -6,6 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {
     public Weapon weapon;
 
+    public Sprite weaponIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class PlayerAttack : MonoBehaviour
         weaponGo.transform.localRotation = Quaternion.identity;
 
         this.weapon = weaponGo.GetComponent<Weapon>();
+        this.weaponIcon = itemSO.icon;
     }
 
     public void UnloadWeapon()

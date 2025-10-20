@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -17,6 +18,8 @@ public class DialogueUI : MonoBehaviour
     private List<string> contentList;
     private int contentIndex = 0;
     private GameObject uiGameObject;
+
+    private Action OnDiagueEnd;
 
     private void Awake()
     {
@@ -43,7 +46,7 @@ public class DialogueUI : MonoBehaviour
         uiGameObject.SetActive(true);
     }
 
-    public void Show(string name, string[] content)
+    public void Show(string name, string[] content,Action OnDiagueEnd=null)
     {
         uiGameObject.SetActive(true);
 
@@ -53,6 +56,7 @@ public class DialogueUI : MonoBehaviour
         contentIndex = 0;
         contentText.text = contentList[0];
 
+        this.OnDiagueEnd = OnDiagueEnd;
     }
     public void Hide()
     {
@@ -64,6 +68,7 @@ public class DialogueUI : MonoBehaviour
         contentIndex++;
         if (contentIndex >= contentList.Count)
         {
+            OnDiagueEnd?.Invoke();
             Hide();return;
         }
         
