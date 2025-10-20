@@ -60,7 +60,7 @@ public class InventoryUI : MonoBehaviour
     {
         
         GameObject itemGO = GameObject.Instantiate(itemPrefab);
-        itemGO.transform.parent = content.transform;
+        itemGO.transform.SetParent(content.transform);
         ItemUI itemUI = itemGO.GetComponent<ItemUI>();
         
         itemUI.InitItem(itemSO);
@@ -76,6 +76,6 @@ public class InventoryUI : MonoBehaviour
         Destroy(itemUI.gameObject);
         InventoryManager.Instance.RemoveItem(itemSO);
 
-        //TODO:使用物品效果
+        GameObject.FindGameObjectWithTag(Tag.PLAYER).GetComponent<Player>().UseItem(itemSO);
     }
 }

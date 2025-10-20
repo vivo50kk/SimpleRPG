@@ -28,6 +28,21 @@ public class PlayerAttack : MonoBehaviour
     }
     public void LoadWeapon(ItemSO itemSO)
     {
+        if(weapon!=null)
+        {
+            Destroy(weapon.gameObject);
+            weapon = null;
+        }
+
+        string prefabName = itemSO.prefab.name;
+        Transform weaponParent = transform.Find(prefabName + "Position");
+        GameObject weaponGo = GameObject.Instantiate(itemSO.prefab);
+        
+        weaponGo.transform.SetParent(weaponParent);
+        weaponGo.transform.localPosition = Vector3.zero;
+        weaponGo.transform.localRotation = Quaternion.identity;
+
+        this.weapon = weaponGo.GetComponent<Weapon>();
     }
 
     public void UnloadWeapon()
