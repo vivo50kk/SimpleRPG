@@ -59,7 +59,7 @@ public class InventoryUI : MonoBehaviour
     public void AddItem(ItemSO itemSO)
     {
         
-        GameObject itemGO = GameObject.Instantiate(itemPrefab);
+        GameObject itemGO = GameObject.Instantiate(itemPrefab,content.transform);
         itemGO.transform.SetParent(content.transform);
         ItemUI itemUI = itemGO.GetComponent<ItemUI>();
         
