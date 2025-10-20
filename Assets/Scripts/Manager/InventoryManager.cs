@@ -19,11 +19,7 @@ public class InventoryManager : MonoBehaviour
         itemList = new List<ItemSO>();
     }
 
-    //IEnumerator Start()
-    //{
-    //    yield return new WaitForSeconds(1);
-    //    AddItem(defaultWeapon);
-    //}
+    
 
     public void AddItem(ItemSO item)
     {
